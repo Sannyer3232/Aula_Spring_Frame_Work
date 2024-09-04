@@ -16,16 +16,16 @@ public class TestandoPesquisar {
         EntityManager em = fabricaEM.createEntityManager();
 
 
-        Query query = em.createQuery("select p from Pessoa p where p.nome like :parNome");
+        Query query = em.createQuery("select p from pessoa p where p.nome like :parNome");
 
         query.setParameter("parNome", "%"+"Tamires"+"%");
 
         List<Pessoa> pessoas = query.getResultList();
-
         for (Pessoa p : pessoas) {
             System.out.println("Nome: " + p.getNome());
             System.out.println("Idade: " + p.getIdade());
         }
+
 
 
         em.close();

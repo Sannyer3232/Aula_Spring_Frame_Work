@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 
+
 @Entity(name = "pessoa")
 public class Pessoa {
 
@@ -9,14 +10,34 @@ public class Pessoa {
     @Column(name="pesid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name="pescpf", nullable=false, unique=true, length=11)
     private String cpf;
+
     @Column(name="pesnome", nullable = false)
     private String nome;
+
     @Column(name ="pesidade", nullable = true)
     private int idade;
 
+    @ManyToOne
+    private Cidade cidade;
+
     public Pessoa() {
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+    public Pessoa(String cpf, String nome, int idade) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.idade = idade;
     }
 
     public Pessoa(long id, String cpf, int idade, String nome) {
@@ -56,5 +77,16 @@ public class Pessoa {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", cidade=" + cidade +
+                '}';
     }
 }
